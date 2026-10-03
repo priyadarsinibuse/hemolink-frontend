@@ -1,0 +1,353 @@
+/* =========================================
+   SIGNUP PAGE
+========================================= */
+
+.signup-page {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #fff0f2;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   SIGNUP CARD
+========================================= */
+
+.signup-page .signup-card {
+  width: 478px;
+  height: 759px;
+
+  background: #ffffff;
+
+  padding: 50px 40px;
+
+  text-align: center;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.signup-page .signup-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 2px;
+}
+
+.signup-page .signup-logo img {
+  width: 150px;
+  height: auto;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.signup-page .signup-card h1 {
+  font-size: 30px;
+  font-weight: 600;
+
+  color: #111111;
+
+  margin-bottom: 4px;
+}
+
+.signup-page .signup-subtitle {
+  font-size: 15px;
+
+  color: #777777;
+
+  margin-bottom: 12px;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.signup-page .form-group {
+  width: 300px !important;
+
+  margin: 0 auto 8px !important;
+
+  text-align: left;
+}
+
+.signup-page .form-group label {
+  display: block;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #273244;
+
+  margin-bottom: 4px;
+}
+
+
+/* =========================================
+   INPUT BOX
+========================================= */
+
+.signup-page .input-box {
+  width: 300px !important;
+  max-width: 300px !important;
+
+  height: 40px !important;
+
+  margin: 0 auto !important;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #d3d3d3;
+
+  border-radius: 7px;
+
+  padding: 0 10px;
+
+  background: #ffffff;
+
+  transition: 0.2s ease;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================
+   INPUT FOCUS
+========================================= */
+
+.signup-page .input-box:focus-within {
+  border-color: #e50914;
+
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.08);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.signup-page .input-box > svg {
+  width: 15px !important;
+  height: 15px !important;
+
+  color: #718096;
+
+  flex-shrink: 0;
+
+  margin-right: 8px;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.signup-page .input-box input {
+  width: 100% !important;
+  height: 100% !important;
+
+  border: none !important;
+  outline: none !important;
+
+  background: transparent;
+
+  font-size: 11px;
+
+  color: #333333;
+}
+
+.signup-page .input-box input::placeholder {
+  color: #999999;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   EYE BUTTON
+========================================= */
+
+.signup-page .eye-btn {
+  width: 28px !important;
+  height: 25px !important;
+
+  border: none !important;
+
+  background: transparent !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.signup-page .eye-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+
+  color: #718096;
+}
+
+
+/* =========================================
+   PASSWORD HINT
+========================================= */
+
+.signup-page .password-hint {
+  width: 300px !important;
+
+  margin: 2px auto 0 !important;
+
+  font-size: 9px;
+
+  color: #777777;
+
+  text-align: left;
+}
+
+
+/* =========================================
+   SIGN UP BUTTON
+========================================= */
+
+.signup-page .signup-btn {
+  width: 300px !important;
+  max-width: 300px !important;
+
+  height: 42px !important;
+
+  margin: 3px auto 0 !important;
+
+  border: none !important;
+
+  border-radius: 7px;
+
+  background: #e50914;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 7px;
+
+  cursor: pointer;
+}
+
+.signup-page .signup-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+
+/* =========================================
+   OR DIVIDER
+========================================= */
+
+.signup-page .or-divider {
+  width: 300px !important;
+
+  margin: 10px auto 8px !important;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.signup-page .or-divider span {
+  flex: 1;
+
+  height: 1px;
+
+  background: #dddddd;
+}
+
+.signup-page .or-divider p {
+  font-size: 12px;
+
+  color: #777777;
+}
+
+
+/* =========================================
+   LOGIN TEXT
+========================================= */
+
+.signup-page .login-text {
+  font-size: 16px;
+
+  color: #707070;
+}
+
+.signup-page .login-text a {
+  color: #d71920;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.signup-page .login-text a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 478px) {
+
+  .signup-page .signup-card {
+    width: 100%;
+    height: 100vh;
+
+    padding: 12px 20px;
+  }
+
+  .signup-page .form-group {
+    width: 300px !important;
+    max-width: 100%;
+  }
+
+  .signup-page .input-box,
+  .signup-page .signup-btn,
+  .signup-page .or-divider,
+  .signup-page .password-hint {
+    width: 300px !important;
+    max-width: 100% !important;
+  }
+}

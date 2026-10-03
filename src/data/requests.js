@@ -1,0 +1,96 @@
+// Frontend demo data for receiver blood requests.
+// Private contact details are intentionally shown only after a donor accepts a request.
+export const emergencyRequests = [
+  {
+    id: 1,
+    bloodGroup: "A+",
+    units: 2,
+    hospital: "Max Hospital, Delhi",
+    distance: 2.3,
+    urgency: "Critical",
+    postedAgo: "12 min ago",
+    receiverName: "Priya Sharma",
+    receiverPhone: "+91 98765 43210",
+    receiverEmail: "priya.receiver@example.com",
+    message: "Blood is urgently required for a scheduled surgery today.",
+  },
+  {
+    id: 2,
+    bloodGroup: "B+",
+    units: 1,
+    hospital: "Metro Hospital, Delhi",
+    distance: 3.1,
+    urgency: "High",
+    postedAgo: "48 min ago",
+    receiverName: "Rahul Verma",
+    receiverPhone: "+91 98765 12345",
+    receiverEmail: "rahul.receiver@example.com",
+    message: "Please contact the receiver after accepting this request.",
+  },
+  {
+    id: 3,
+    bloodGroup: "O-",
+    units: 3,
+    hospital: "Care Hospital, Delhi",
+    distance: 4.7,
+    urgency: "Critical",
+    postedAgo: "1 hr ago",
+    receiverName: "Anita Singh",
+    receiverPhone: "+91 98111 22334",
+    receiverEmail: "anita.receiver@example.com",
+    message: "O- donors are urgently needed. Thank you for considering this request.",
+  },
+  {
+    id: 4,
+    bloodGroup: "O+",
+    units: 2,
+    hospital: "Life Care Hospital, Noida",
+    distance: 6.2,
+    urgency: "Moderate",
+    postedAgo: "3 hr ago",
+    receiverName: "Vikram Kumar",
+    receiverPhone: "+91 98989 45678",
+    receiverEmail: "vikram.receiver@example.com",
+    message: "Two units are requested for treatment this week.",
+  },
+  {
+    id: 5,
+    bloodGroup: "AB+",
+    units: 1,
+    hospital: "Apollo Hospital, Gurugram",
+    distance: 9.4,
+    urgency: "High",
+    postedAgo: "5 hr ago",
+    receiverName: "Neha Gupta",
+    receiverPhone: "+91 97654 32109",
+    receiverEmail: "neha.receiver@example.com",
+    message: "One compatible donor is required as soon as possible.",
+  },
+];
+
+export const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+export const urgencyLevels = ["Critical", "High", "Moderate"];
+
+export const notifications = [
+  {
+    id: 1,
+    title: "Urgent: A+ needed at Max Hospital",
+    body: "2 units required within the next 4 hours.",
+    time: "12 min ago",
+    tone: "brand",
+  },
+  {
+    id: 2,
+    title: "Donation camp near you",
+    body: "Red Cross camp at Connaught Place this Sunday.",
+    time: "2 hr ago",
+    tone: "camp",
+  },
+  {
+    id: 3,
+    title: "You are eligible to donate",
+    body: "90 days have passed since your last donation.",
+    time: "1 day ago",
+    tone: "success",
+  },
+];

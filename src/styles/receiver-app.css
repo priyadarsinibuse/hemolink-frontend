@@ -1,0 +1,237 @@
+:root {
+  --primary: #DE1E25;
+  --primary-hover: #c41820;
+  --primary-light: #FDE8E9;
+  --bg-color: #F8F9FA;
+  --surface: #FFFFFF;
+  --text-main: #1F2937;
+  --text-muted: #6B7280;
+  --border-color: #E5E7EB;
+  --success: #10B981;
+  --success-light: #D1FAE5;
+  --warning: #F59E0B;
+  --warning-light: #FEF3C7;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+/* Element-level resets — SCOPED to .receiver-app only, so they never
+   affect Donor pages, RolePage, Login, etc. */
+.receiver-app {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.receiver-app * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.receiver-app a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.receiver-app ul {
+  list-style: none;
+}
+
+.receiver-app button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+.receiver-app input,
+.receiver-app select,
+.receiver-app textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* Utility classes — kept GLOBAL (not scoped) since they only apply
+   where explicitly used by class name (opt-in), so there's no bleed
+   risk into Donor pages. This also lets ReceiverRegister.jsx (which
+   isn't wrapped in the receiver-app Layout) still use them. */
+.card {
+  background-color: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: var(--text-main);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-color);
+  border-color: #D1D5DB;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge.pending {
+  background-color: var(--warning-light);
+  color: #B45309;
+}
+
+.badge.accepted {
+  background-color: var(--success-light);
+  color: #047857;
+}
+
+.badge.declined {
+  background-color: var(--danger-light);
+  color: #B91C1C;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--surface);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.header {
+  height: 80px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.page-content {
+  padding: 32px;
+  flex: 1;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+@media (max-width: 1024px) {
+  .receiver-app .sidebar {
+    width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .receiver-app.app-container {
+    flex-direction: column;
+  }
+  .receiver-app .sidebar {
+    display: none;
+  }
+  .receiver-app .header {
+    padding: 0 20px;
+  }
+  .receiver-app .page-content {
+    padding: 20px;
+  }
+}

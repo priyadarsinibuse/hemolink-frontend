@@ -1,0 +1,758 @@
+/* =========================================================
+   HEMOLINK - RECEIVER REGISTRATION PAGE
+   ========================================================= */
+
+.register-page {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+
+  display: flex;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   LEFT BRAND / INSPIRATIONAL PANEL
+   ========================================================= */
+
+.register-brand-panel {
+  width: 30%;
+  min-width: 290px;
+  height: 100vh;
+
+  padding: 26px 32px 30px;
+
+  background: #f8f1ef;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.brand-logo-wrap {
+  flex: 0 0 auto;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  background: transparent;
+}
+
+.register-brand-logo {
+  width: min(100%, 520px);
+  height: auto;
+
+  max-height: 360px;
+
+  object-fit: contain;
+  object-position: center top;
+
+  display: block;
+
+  background: transparent;
+
+  mix-blend-mode: multiply;
+}
+
+
+/* =========================================================
+   BRAND TEXT
+   ========================================================= */
+
+.brand-copy {
+  margin-top: 18px;
+}
+
+.brand-copy h1 {
+  margin: 0;
+
+  color: #14243d;
+
+  font-size: clamp(34px, 3.2vw, 50px);
+
+  line-height: 1.08;
+
+  letter-spacing: -1px;
+
+  font-weight: 700;
+}
+
+.brand-copy h1 span {
+  color: #c81014;
+}
+
+
+/* =========================================================
+   BRAND BENEFITS
+   ========================================================= */
+
+.brand-benefits {
+  margin-top: auto;
+
+  padding-top: 28px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+.brand-benefit {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 15px;
+}
+
+.benefit-icon {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: #f9e9e8;
+
+  color: #d41419;
+}
+
+.brand-benefit h3 {
+  margin: 2px 0 5px;
+
+  color: #18263a;
+
+  font-size: 16px;
+
+  font-weight: 600;
+}
+
+.brand-benefit p {
+  margin: 0;
+
+  color: #68768a;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  max-width: 300px;
+}
+
+
+/* =========================================================
+   RIGHT REGISTRATION CONTAINER
+   ========================================================= */
+
+.register-container {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100vh;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: center;
+
+  padding: 18px 32px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   REGISTRATION CARD
+   ========================================================= */
+
+.register-card {
+  width: min(100%, 1000px);
+
+  max-height: calc(100vh - 36px);
+
+  padding: 24px 30px !important;
+
+  overflow: visible;
+
+  box-shadow: none !important;
+
+  border: none !important;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.register-header {
+  margin-bottom: 16px;
+}
+
+.tagline {
+  margin: 0 0 5px;
+
+  font-size: 30px;
+
+  line-height: 1.2;
+
+  color: var(--primary, #e31b23);
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+.register-title {
+  margin: 0 0 5px;
+
+  font-size: 25px;
+
+  line-height: 1.25;
+
+  color: var(--text-main, #18263a);
+
+  font-weight: 500;
+}
+
+.register-subtitle {
+  color: var(--text-muted, #68768a);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  column-gap: 18px;
+
+  row-gap: 9px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.register-form .form-group {
+  width: 100%;
+
+  min-width: 0;
+
+  margin-bottom: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.register-form .form-label {
+  display: block;
+
+  width: 100%;
+
+  margin-bottom: 4px;
+
+  color: #263957;
+
+  font-size: 16px;
+
+  line-height: 1.2;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   NORMAL INPUT / SELECT
+   ========================================================= */
+
+.register-form .form-control {
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 48px;
+
+  box-sizing: border-box;
+
+  padding: 8px 11px;
+
+  font-size: 14px;
+
+  line-height: 1.2;
+
+  color: #18202e;
+
+  background: #ffffff;
+
+  border: 1px solid #d9dee7;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.register-form .form-control::placeholder {
+  color: #8a919d;
+}
+
+.register-form .form-control:focus {
+  border-color: #d41419;
+
+  box-shadow: 0 0 0 2px rgba(212, 20, 25, 0.08);
+}
+
+
+/* =========================================================
+   PASSWORD WRAPPER
+   THIS IS THE IMPORTANT FIX
+   ========================================================= */
+
+.password-wrapper {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  display: block;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PASSWORD INPUT
+   ========================================================= */
+
+.password-wrapper .password-field {
+  display: block;
+
+  width: 100% !important;
+  min-width: 0;
+
+  height: 48px;
+
+  box-sizing: border-box;
+
+  /* Space for eye icon */
+  padding: 8px 46px 8px 11px !important;
+
+  margin: 0;
+
+  font-size: 14px;
+
+  border: 1px solid #d9dee7;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  outline: none;
+}
+
+.password-wrapper .password-field:focus {
+  border-color: #d41419;
+
+  box-shadow: 0 0 0 2px rgba(212, 20, 25, 0.08);
+}
+
+
+/* =========================================================
+   EYE BUTTON
+   DEFINITELY INSIDE INPUT
+   ========================================================= */
+
+.password-eye {
+  position: absolute;
+
+  top: 50%;
+  right: 11px;
+
+  transform: translateY(-50%);
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #68768a;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   EYE ICON ITSELF
+   ========================================================= */
+
+.password-eye svg {
+  width: 18px;
+  height: 18px;
+
+  display: block;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   EYE HOVER
+   ========================================================= */
+
+.password-eye:hover {
+  color: #d41419;
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   EYE FOCUS
+   ========================================================= */
+
+.password-eye:focus,
+.password-eye:focus-visible,
+.password-eye:active {
+  outline: none;
+
+  border: none;
+
+  box-shadow: none;
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   ADDRESS
+   ========================================================= */
+
+.address-control {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  resize: none;
+
+  height: 48px;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.w-full {
+  width: 100%;
+
+  padding: 10px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   REGISTER ACTIONS
+   ========================================================= */
+
+.register-actions {
+  width: 100%;
+
+  margin-top: 14px;
+  transform: translateY(25px);
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.form-error {
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  margin-top: 2px;
+
+  color: #d41419;
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.register-success {
+  margin-bottom: 12px;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: #ecfdf5;
+
+  color: #047857;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   SMALL HEIGHT SCREENS
+   ========================================================= */
+
+@media (max-height: 720px) {
+
+  .register-brand-panel {
+    padding-top: 16px;
+  }
+
+  .register-brand-logo {
+    width: 250px;
+
+    max-height: 165px;
+  }
+
+  .brand-copy {
+    margin-top: 6px;
+  }
+
+  .brand-copy h1 {
+    font-size: 39px;
+  }
+
+  .brand-benefits {
+    margin-top: 20px;
+
+    gap: 14px;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .register-card {
+    padding: 16px 26px !important;
+  }
+
+  .register-header {
+    margin-bottom: 9px;
+  }
+
+  .register-subtitle {
+    display: none;
+  }
+
+  .form-grid {
+    row-gap: 5px;
+  }
+
+  .register-form .form-control {
+    min-height: 48px;
+
+    height: 48px;
+
+    padding: 6px 10px;
+  }
+
+  /* Keep password eye inside on small screens */
+  .password-wrapper .password-field {
+    height: 48px;
+
+    min-height: 48px;
+
+    padding-right: 46px !important;
+  }
+
+  .password-eye {
+    right: 10px;
+  }
+
+  .address-control {
+    height: 40px;
+  }
+
+  .register-actions {
+  margin-top: 8px;
+  transform: translateY(25px);
+}
+  }
+
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .register-brand-panel {
+    width: 32%;
+
+    min-width: 280px;
+
+    padding: 22px;
+  }
+
+  .brand-copy h1 {
+    font-size: 36px;
+  }
+
+  .register-container {
+    padding: 12px;
+  }
+
+  .register-card {
+    padding: 18px !important;
+  }
+
+  .form-grid {
+    column-gap: 14px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .register-page {
+    height: auto;
+
+    min-height: 100vh;
+
+    overflow-y: auto;
+  }
+
+  .register-brand-panel {
+    display: none;
+  }
+
+  .register-container {
+    width: 100%;
+
+    min-height: 100vh;
+
+    height: auto;
+
+    overflow: visible;
+
+    padding: 20px 14px;
+
+    box-sizing: border-box;
+  }
+
+  .register-card {
+    width: 100%;
+
+    max-height: none;
+
+    overflow: visible;
+
+    padding: 18px !important;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+
+    column-gap: 0;
+
+    row-gap: 10px;
+  }
+
+  .tagline {
+    font-size: 24px;
+  }
+
+  .register-title {
+    font-size: 22px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .register-container {
+    padding: 14px 10px;
+  }
+
+  .register-card {
+    padding: 14px !important;
+  }
+
+  .tagline {
+    font-size: 21px;
+  }
+
+  .register-title {
+    font-size: 20px;
+  }
+
+  .register-form .form-label {
+    font-size: 14px;
+  }
+
+  .register-form .form-control {
+    font-size: 14px;
+  }
+}
