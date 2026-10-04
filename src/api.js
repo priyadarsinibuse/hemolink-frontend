@@ -29,3 +29,8 @@ export const saveDonorProfile = (data) =>
   request("PUT", "/api/auth/donor-profile", data, true);
 
 export const getMe = () => request("GET", "/api/auth/me", undefined, true);
+export const createRequest = (data) => request("POST", "/api/requests", data, true);
+
+export const getMyRequests = () => request("GET", "/api/requests/mine", undefined, true);
+
+export const getRequests = () => request("GET", "/api/requests", undefined, true);
