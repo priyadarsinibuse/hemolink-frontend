@@ -34,3 +34,8 @@ export const createRequest = (data) => request("POST", "/api/requests", data, tr
 export const getMyRequests = () => request("GET", "/api/requests/mine", undefined, true);
 
 export const getRequests = () => request("GET", "/api/requests", undefined, true);
+export const getDonorRequests = () =>
+  request("GET", "/api/requests/donor", undefined, true);
+
+export const respondToRequest = (id, decision) =>
+  request("PUT", `/api/requests/${id}/respond`, { decision }, true);
