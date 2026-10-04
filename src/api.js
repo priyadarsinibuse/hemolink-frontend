@@ -24,3 +24,11 @@ export const loginUser = (email, password) =>
 
 export const setRole = (role) =>
   request("PUT", "/api/auth/role", { role }, true);
+  export const saveDonorProfile = (data) =>
+  request("PUT", "/api/auth/donor-profile", data, true);
+
+export const getMe = () => request("GET", "/api/auth/me", undefined, true);
+export const saveDonorProfile = (data) =>
+  request("PUT", "/api/auth/donor-profile", data, true);
+
+export const getMe = () => request("GET", "/api/auth/me", undefined, true);

@@ -16,7 +16,6 @@ import {
   Lock,
   Droplet,
   ShieldPlus,
-  Check,
 } from "lucide-react";
 import Logo from "@/components/common/Logo";
 
@@ -24,6 +23,7 @@ import FormInput from "@/components/registration/FormInput";
 import RegistrationStepper from "@/components/registration/RegistrationStepper";
 import { bloodGroups } from "@/data/requests";
 import { saveDonor } from "@/utils/storage";
+import { saveDonorProfile } from "../api";
 
 const initialForm = {
   fullName: "",
@@ -45,7 +45,6 @@ const initialForm = {
   tattooRecent: "",
 };
 
-
 const highlights = [
   { icon: Droplet, title: "Donate Blood", body: "Your donation can save up to 3 lives." },
   { icon: MapPin, title: "Help Nearby", body: "Respond to emergency requests in your area." },
@@ -55,8 +54,16 @@ const highlights = [
 export default function Register() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(() => {
+    try {
+      const u = JSON.parse(localStorage.getItem("user") || "null");
+      return { ...initialForm, fullName: u?.name || "", email: u?.email || "" };
+    } catch {
+      return initialForm;
+    }
+  });
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   function setField(name, value) {
     setForm((f) => ({ ...f, [name]: value }));
@@ -65,20 +72,30 @@ export default function Register() {
     setStep((s) => Math.min(3, s + 1));
   }
 
-  // Dashboard navigation is deliberately isolated from section navigation.
-  // This function is called only by an explicit click on the final Next button.
-  function handleCompleteRegistration() {
+  // Called only by an explicit click on the final Next button.
+  async function handleCompleteRegistration() {
     if (step !== 3 || saving) return;
+    setError("");
 
-    setSaving(true);
-    setTimeout(() => {
+    if (!form.bloodGroup || !form.phone.trim() || !form.city.trim()) {
+      return setError("Please fill blood group, phone number and city");
+    }
+
+    try {
+      setSaving(true);
+      const data = await saveDonorProfile(form);
+      localStorage.setItem("user", JSON.stringify(data.user));
       saveDonor({
         ...form,
         totalDonations: form.firstTime === "Yes" ? 0 : 7,
         registeredAt: new Date().toISOString(),
       });
       navigate("/dashboard", { replace: true });
-    }, 600);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -108,9 +125,7 @@ export default function Register() {
             </div>
           ))}
         </div>
-
       </aside>
-
 
       {/* Form */}
       <main className="px-5 py-8 sm:px-10 sm:py-12">
@@ -276,6 +291,10 @@ export default function Register() {
                   onChange={setField}
                 />
               </div>
+            )}
+
+            {error && (
+              <p className="mt-6 text-sm font-medium text-red-600">{error}</p>
             )}
 
             <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
