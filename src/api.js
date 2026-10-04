@@ -9,7 +9,7 @@ async function request(method, path, body, useAuth = false) {
   const res = await fetch(`${API}${path}`, {
     method,
     headers,
-    body: JSON.stringify(body),
+    body: body === undefined ? undefined : JSON.stringify(body),
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.message || "Something went wrong");
@@ -24,10 +24,7 @@ export const loginUser = (email, password) =>
 
 export const setRole = (role) =>
   request("PUT", "/api/auth/role", { role }, true);
-  export const saveDonorProfile = (data) =>
-  request("PUT", "/api/auth/donor-profile", data, true);
 
-export const getMe = () => request("GET", "/api/auth/me", undefined, true);
 export const saveDonorProfile = (data) =>
   request("PUT", "/api/auth/donor-profile", data, true);
 
