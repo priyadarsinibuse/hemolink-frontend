@@ -1,85 +1,91 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 import logo from "../assets/logo.png.jpeg";
+import { loginUser } from "../api";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!email.trim() || !password) {
+      return setError("Please enter email and password");
+    }
+
+    try {
+      setLoading(true);
+      const data = await loginUser(email.trim(), password);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/select-role");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-page">
-
       {/* WHITE LOGIN CARD */}
       <div className="login-card">
-
         {/* LOGO */}
-        <img
-          src={logo}
-          alt="HemoLink Logo"
-          className="login-logo"
-        />
+        <img src={logo} alt="HemoLink Logo" className="login-logo" />
 
         {/* HEADING */}
         <h1>Welcome Back!</h1>
 
-        <p className="login-subtitle">
-          Please log in to your account
-        </p>
-
+        <p className="login-subtitle">Please log in to your account</p>
 
         {/* FORM */}
-        <form>
-
+        <form onSubmit={handleLogin}>
           {/* EMAIL */}
           <div className="form-group">
-
-            <label htmlFor="email">
-              Email Address
-            </label>
+            <label htmlFor="email">Email Address</label>
 
             <input
               id="email"
               type="email"
               placeholder="Enter your email"
               className="login-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-
           </div>
-
 
           {/* PASSWORD */}
           <div className="form-group">
-
-            <label htmlFor="password">
-              Password
-            </label>
+            <label htmlFor="password">Password</label>
 
             <div className="password-wrapper">
-
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 className="login-input password-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <button
                 type="button"
                 className="eye-button"
-                onClick={() =>
-                  setShowPassword(!showPassword)
-                }
+                onClick={() => setShowPassword(!showPassword)}
                 aria-label="Show or hide password"
               >
-
                 {showPassword ? (
-
                   /* EYE OFF */
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="eye-icon"
-                  >
+                  <svg viewBox="0 0 24 24" className="eye-icon">
                     <path
                       d="M3 3l18 18"
                       fill="none"
@@ -97,14 +103,9 @@ function Login() {
                       strokeLinejoin="round"
                     />
                   </svg>
-
                 ) : (
-
                   /* EYE */
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="eye-icon"
-                  >
+                  <svg viewBox="0 0 24 24" className="eye-icon">
                     <path
                       d="M2.2 12s3.5-6 9.8-6 9.8 6 9.8 6-3.5 6-9.8 6-9.8-6-9.8-6z"
                       fill="none"
@@ -121,66 +122,42 @@ function Login() {
                       strokeWidth="1.8"
                     />
                   </svg>
-
                 )}
-
               </button>
-
             </div>
-
           </div>
-
 
           {/* REMEMBER + FORGOT */}
           <div className="login-options">
-
             <label className="remember-me">
+              <input type="checkbox" />
 
-              <input
-                type="checkbox"
-              />
-
-              <span>
-                Remember Me
-              </span>
-
+              <span>Remember Me</span>
             </label>
 
-
-            <a
-              href="/forgot-password"
-              className="forgot-link"
-            >
+            <a href="/forgot-password" className="forgot-link">
               Forgot Password?
             </a>
-
           </div>
 
+          {/* ERROR */}
+          {error && (
+            <p style={{ color: "#e11d48", fontSize: "14px", margin: "8px 0" }}>
+              {error}
+            </p>
+          )}
 
           {/* LOGIN BUTTON */}
-          
-<Link
-  to="/select-role"
-  className="login-button"
->
-  Log In
-</Link>
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Please wait..." : "Log In"}
+          </button>
         </form>
-
 
         {/* SIGN UP */}
         <p className="signup-text">
-
-          Don't have an account?{" "}
-
-          <a href="/">
-            Sign Up
-          </a>
-
+          Don't have an account? <a href="/">Sign Up</a>
         </p>
-
       </div>
-
     </div>
   );
 }
