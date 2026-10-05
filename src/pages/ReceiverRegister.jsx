@@ -1,60 +1,86 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Droplet, MapPin, ShieldPlus } from 'lucide-react';
+import { Droplet, MapPin, ShieldPlus } from 'lucide-react';
 import '../styles/receiver-app.css';
 import './ReceiverRegister.css';
+import { saveReceiverProfile } from '../api';
 
 const ReceiverRegister = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    bloodGroup: '',
-    dateOfBirth: '',
-    gender: '',
-    city: '',
-    address: ''
+  const [formData, setFormData] = useState(() => {
+    let u = null;
+    try {
+      u = JSON.parse(localStorage.getItem('user') || 'null');
+    } catch {
+      u = null;
+    }
+    return {
+      fullName: u?.name || '',
+      email: u?.email || '',
+      phone: '',
+      bloodGroup: '',
+      dateOfBirth: '',
+      gender: '',
+      city: '',
+      address: '',
+    };
   });
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
+  const [saving, setSaving] = useState(false);
 
   const validate = () => {
     const newErrors = {};
     if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid email is required';
-    if (!formData.phone.trim() || formData.phone.length < 10) newErrors.phone = 'Valid phone number is required';
-    if (!formData.password || formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.phone.trim() || formData.phone.trim().length < 10) newErrors.phone = 'Valid phone number is required';
     if (!formData.bloodGroup) newErrors.bloodGroup = 'Blood group is required';
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.city.trim()) newErrors.city = 'City is required';
     if (!formData.address.trim()) newErrors.address = 'Address is required';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when typing
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Demo navigation for the frontend: details are not required yet.
-    // Backend validation and account creation will be connected later.
-    localStorage.setItem('hemolink_receiver', JSON.stringify({
-      fullName: formData.fullName.trim() || 'Receiver'
-    }));
-    navigate('/receiver/dashboard');
+    setApiError('');
+    if (!validate() || saving) return;
+
+    if (!localStorage.getItem('token')) {
+      return setApiError('Please sign up or log in first.');
+    }
+
+    try {
+      setSaving(true);
+      const data = await saveReceiverProfile({
+        fullName: formData.fullName.trim(),
+        phone: formData.phone.trim(),
+        bloodGroup: formData.bloodGroup,
+        dob: formData.dateOfBirth,
+        gender: formData.gender,
+        city: formData.city.trim(),
+        address: formData.address.trim(),
+      });
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem(
+        'hemolink_receiver',
+        JSON.stringify({ fullName: formData.fullName.trim() })
+      );
+      navigate('/receiver/dashboard');
+    } catch (err) {
+      setApiError(err.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -86,7 +112,7 @@ const ReceiverRegister = () => {
           <div className="register-header">
             <div>
               <p className="tagline">HemoLink • Request. Receive. Save Lives.</p>
-              <h2 className="register-title">Create Receiver Account</h2>
+              <h2 className="register-title">Receiver Details</h2>
               <p className="register-subtitle">Complete your details to connect with blood donors when you need them.</p>
             </div>
           </div>
@@ -100,9 +126,8 @@ const ReceiverRegister = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Email Address *</label>
-                <input type="email" name="email" className="form-control" value={formData.email} onChange={handleChange} placeholder="john@example.com" />
-                {errors.email && <div className="form-error">{errors.email}</div>}
+                <label className="form-label">Email Address</label>
+                <input type="email" name="email" className="form-control" value={formData.email} readOnly placeholder="john@example.com" />
               </div>
 
               <div className="form-group">
@@ -121,75 +146,6 @@ const ReceiverRegister = () => {
                 {errors.bloodGroup && <div className="form-error">{errors.bloodGroup}</div>}
               </div>
 
-              {/* PASSWORD */}
-<div className="form-group">
-  <label className="form-label">Password *</label>
-
-  <div className="password-wrapper">
-    <input
-      type={showPassword ? "text" : "password"}
-      name="password"
-      className="form-control password-field"
-      value={formData.password}
-      onChange={handleChange}
-    />
-
-    <button
-      type="button"
-      className="password-eye"
-      onClick={() => setShowPassword((prev) => !prev)}
-      aria-label="Show or hide password"
-    >
-      {showPassword ? (
-        <EyeOff size={18} />
-      ) : (
-        <Eye size={18} />
-      )}
-    </button>
-  </div>
-
-  {errors.password && (
-    <div className="form-error">{errors.password}</div>
-  )}
-</div>
-
-
-{/* CONFIRM PASSWORD */}
-<div className="form-group">
-  <label className="form-label">Confirm Password *</label>
-
-  <div className="password-wrapper">
-    <input
-      type={showConfirmPassword ? "text" : "password"}
-      name="confirmPassword"
-      className="form-control password-field"
-      value={formData.confirmPassword}
-      onChange={handleChange}
-    />
-
-    <button
-      type="button"
-      className="password-eye"
-      onClick={() =>
-        setShowConfirmPassword((prev) => !prev)
-      }
-      aria-label="Show or hide confirm password"
-    >
-      {showConfirmPassword ? (
-        <EyeOff size={18} />
-      ) : (
-        <Eye size={18} />
-      )}
-    </button>
-  </div>
-
-  {errors.confirmPassword && (
-    <div className="form-error">
-      {errors.confirmPassword}
-    </div>
-  )}
-</div>
-
               <div className="form-group">
                 <label className="form-label">Date of Birth *</label>
                 <input type="date" name="dateOfBirth" className="form-control" value={formData.dateOfBirth} onChange={handleChange} />
@@ -206,7 +162,7 @@ const ReceiverRegister = () => {
 
               <div className="form-group">
                 <label className="form-label">City / Location *</label>
-                <input type="text" name="city" className="form-control" value={formData.city} onChange={handleChange} placeholder="e.g. New York" />
+                <input type="text" name="city" className="form-control" value={formData.city} onChange={handleChange} placeholder="e.g. Visakhapatnam" />
                 {errors.city && <div className="form-error">{errors.city}</div>}
               </div>
 
@@ -217,8 +173,12 @@ const ReceiverRegister = () => {
               </div>
             </div>
 
+            {apiError && <div className="form-error" style={{ marginBottom: '12px' }}>{apiError}</div>}
+
             <div className="register-actions">
-              <button type="submit" className="btn-primary w-full">Continue to Dashboard</button>
+              <button type="submit" className="btn-primary w-full" disabled={saving}>
+                {saving ? 'Saving...' : 'Continue to Dashboard'}
+              </button>
             </div>
           </form>
         </div>

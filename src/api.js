@@ -46,3 +46,5 @@ export const searchDonors = (bloodGroup, city) =>
     undefined,
     true
   );
+     export const saveReceiverProfile = (data) =>
+     request("PUT", "/api/auth/receiver-profile", data, true);
