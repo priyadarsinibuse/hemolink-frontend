@@ -39,3 +39,10 @@ export const getDonorRequests = () =>
 
 export const respondToRequest = (id, decision) =>
   request("PUT", `/api/requests/${id}/respond`, { decision }, true);
+export const searchDonors = (bloodGroup, city) =>
+  request(
+    "GET",
+    "/api/donors?bloodGroup=" + encodeURIComponent(bloodGroup || "") + "&city=" + encodeURIComponent(city || ""),
+    undefined,
+    true
+  );
